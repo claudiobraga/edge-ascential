@@ -1,0 +1,32 @@
+package com.edge.ascential.claudio.braga.domain.main;
+
+import java.util.List;
+
+import com.edge.ascential.claudio.braga.domain.model.CustomNumberEntity;
+import com.edge.ascential.claudio.braga.domain.model.SearchNumberFinder;
+
+public class Main {
+	
+	public static void main(String[] args) {
+                
+        String fileLocation="C:/Users/cjbde/Documents/Edge/JavaTechnicalTest/jsonfile.json";
+        SearchNumberFinder xou = new SearchNumberFinder();
+        List<CustomNumberEntity> lista; 
+        
+        lista = xou.readFromFile(fileLocation);
+                
+        for(CustomNumberEntity a: lista){
+            System.out.println("-> "+a.getNumber());
+        }
+                
+        System.out.println("-----------------------");
+        int k=50;
+        if(xou.contains(k, lista)){
+            System.out.println("The value "+k+" exist in the list (TRUE)");
+        }else{
+            System.out.println("The value "+k+" don't exist in the list (FALSE)");
+        }
+    }
+
+
+}

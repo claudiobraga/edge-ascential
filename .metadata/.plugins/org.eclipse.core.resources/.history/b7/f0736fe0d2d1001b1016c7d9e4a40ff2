@@ -1,0 +1,31 @@
+package com.edge.ascential.claudio.braga.domain.model;
+
+import java.util.List;
+
+public class SearchNumberFinder implements NumberFinder{
+	
+	/**
+	 * Checks if valueToFind is contained in the list
+	 * @param valueToFind
+	 * @param list
+	 * @return true if valueToFind exist in the list
+	 *          false if not
+	 */
+
+	@Override
+	public boolean contains(int valueToFind, List<CustomNumberEntity> list) {
+		for(CustomNumberEntity cne: list) {
+			if(cne.getNumber().equals(valueToFind+"")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public List<CustomNumberEntity> readFromFile(String filePath) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

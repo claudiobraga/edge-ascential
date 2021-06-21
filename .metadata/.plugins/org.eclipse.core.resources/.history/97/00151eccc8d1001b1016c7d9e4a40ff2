@@ -1,0 +1,5 @@
+package com.edge.ascential.claudio.braga.domain.model;
+
+public interface NumberFinder {
+
+}

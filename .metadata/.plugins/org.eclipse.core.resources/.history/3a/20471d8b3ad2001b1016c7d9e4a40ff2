@@ -1,0 +1,36 @@
+package com.edge.ascential.claudio.braga.domain.model;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+
+import static io.restassured.module.mockmvc.RestAssuredMockMvc.*;
+
+@WebMvcTest
+public class SearchNumberFinderTest {
+	
+	@MockBean
+	private SearchNumberFinder searchNumberFinder;
+	
+	@MockBean
+	private NumberFinder numberFinder;
+	
+	@MockBean
+	private FastestComparator fastestComparator;
+	
+	@BeforeEach
+	public void setup() {
+		standaloneSetup(this.searchNumberFinder);
+	}
+	
+	@Test
+	public void shouldReturnACustomNumberList_WhenReadFromFile () {
+		
+		Assert.assertTrue(true);
+		
+	}
+
+}

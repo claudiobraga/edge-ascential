@@ -1,0 +1,70 @@
+package com.edge.ascential.claudio.braga.domain.model;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.sun.tools.javac.parser.ReferenceParser.ParseException;
+
+public class SearchNumberFinder implements NumberFinder{
+	
+	/**
+	 * Checks if valueToFind is contained in the list
+	 * @param valueToFind
+	 * @param list
+	 * @return true if valueToFind exist in the list
+	 *          false if not
+	 */
+
+	@Override
+	public boolean contains(int valueToFind, List<CustomNumberEntity> list) {
+		for(CustomNumberEntity cne: list) {
+			if(cne.getNumber().equals(valueToFind+"")) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Read a list of CustommNumberEntity from a file 
+	 * In the file the list is as a JSON  object
+	 * @param filePath
+	 * @return a list of CustomNumberEntity objects read from the file.
+	 */
+	@Override
+	public List<CustomNumberEntity> readFromFile(String filePath) {
+		JSONParser jsonParser = new JSONParser();
+		try (FileReader reader = new FileReader("jsonfile.json"))
+		{
+			//read json file
+			Object object = jsonParser.parse(reader);
+			
+			JSONArray listOFCustomValues = (JSONArray) object;
+			
+			//Iterate over list numbers
+			listOFCustomValues.forEach(jfile -> parseListOfObject( (JSONObject) jfile));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private void parseListOfObject(JSONObject jfile) {
+		JSONObject listOfObject = (JSONObject) jfile.get("number");
+		
+	}
+
+}

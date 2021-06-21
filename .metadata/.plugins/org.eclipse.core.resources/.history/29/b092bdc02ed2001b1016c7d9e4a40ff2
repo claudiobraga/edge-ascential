@@ -1,0 +1,78 @@
+package com.edge.ascential.claudio.braga.domain.model;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+
+public class SearchNumberFinder implements NumberFinder{
+	
+	/**
+	 * Checks if valueToFind is contained in the list
+	 * @param valueToFind
+	 * @param list
+	 * @return true if valueToFind exist in the list
+	 *          false if not
+	 */
+
+	@Override
+    public boolean contains(int valueToFind, List<CustomNumberEntity> list) {
+        boolean v = false;
+        FastestComparator fast = new FastestComparator();
+        for (CustomNumberEntity cne : list) {
+            try {
+                Integer.parseInt(cne.getNumber());
+                int valueToFind2 = valueToFind;
+				System.out.println(" " + fast.compare(valueToFind2, cne));
+                if (cne.getNumber().equals(valueToFind2)) {
+                    v = true;
+                }
+            } catch (Exception e) {
+            }
+        }
+        return v;
+    }
+
+	
+	/**
+	 * Read a list of CustommNumberEntity from a file 
+	 * In the file the list is as a JSON  object
+	 * @param filePath
+	 * @return a list of CustomNumberEntity objects read from the file.
+	 */
+	@Override
+    public List<CustomNumberEntity> readFromFile(String filePath) {
+
+        JSONParser jsonParser = new JSONParser();
+        List<CustomNumberEntity> customNumberEntityList = new ArrayList<>();
+
+        try (FileReader reader = new FileReader(filePath)) {
+            //read json file
+            Object object = jsonParser.parse(reader);
+            JSONArray listOFCustomValues = (JSONArray) object;
+            for (Object jsonobj : listOFCustomValues) {
+                CustomNumberEntity cne = new CustomNumberEntity();
+                JSONObject aa = (JSONObject) jsonobj;
+                String number = (String) aa.get("number");
+                cne.setNumber(number);
+                customNumberEntityList.add(cne);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return customNumberEntityList;
+    }
+
+
+}

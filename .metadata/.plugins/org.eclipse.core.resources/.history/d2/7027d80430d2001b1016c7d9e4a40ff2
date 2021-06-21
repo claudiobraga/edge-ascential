@@ -1,0 +1,26 @@
+package com.edge.ascential.claudio.braga.domain.model;
+
+import org.junit.Assert;
+import org.junit.Test;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
+
+@WebMvcTest
+public class SearchNumberFinderTest {
+	
+	@MockBean
+	private SearchNumberFinder searchNumberFinder;
+	
+	@MockBean
+	private NumberFinder numberFinder;
+	
+	@MockBean
+	private FastestComparator fastestComparator;
+	
+	@Test
+	public void shouldreturncaca () {
+		Assert.assertTrue(true);
+	}
+
+}

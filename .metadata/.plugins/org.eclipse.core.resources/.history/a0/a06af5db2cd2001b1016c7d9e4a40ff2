@@ -1,0 +1,34 @@
+package com.edge.ascential.claudio.braga.domain.main;
+
+import java.util.List;
+
+import com.edge.ascential.claudio.braga.domain.model.CustomNumberEntity;
+import com.edge.ascential.claudio.braga.domain.model.FastestComparator;
+import com.edge.ascential.claudio.braga.domain.model.SearchNumberFinder;
+
+public class Main {
+	
+	public static void main(String[] args) {
+        FastestComparator fa = new FastestComparator();
+                
+        String fileLocation="C:/Users/cjbde/Documents/Edge/JavaTechnicalTest/jsonfile.json";
+        SearchNumberFinder xou = new SearchNumberFinder();
+        List<CustomNumberEntity> lista;// = null; 
+        
+        lista = xou.readFromFile(fileLocation);
+                
+        for(CustomNumberEntity a: lista){
+            System.out.println("-> "+a.getNumber());
+        }
+                
+        System.out.println("-----------------------");
+        int k=25;
+        if(xou.contains(k, lista)){
+            System.out.println("o valor "+k+" existe na lista (TRUE)");
+        }else{
+            System.out.println("o valor "+k+" nao existe na lista (FALSE)");
+        }
+    }
+
+
+}
